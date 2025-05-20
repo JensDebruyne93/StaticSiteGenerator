@@ -1,0 +1,15 @@
+from textnode import TextNode, text_node_to_html_node, TextType
+
+def split_nodes_delimiter(old_nodes, delimiter, text_type):
+    new_nodes = []
+    for node in old_nodes:
+        if node.text_type != TextType.NORMAL_TEXT:
+            new_nodes.append(node)
+        else: 
+            split_node = node.text.split(delimiter)
+            for i in range(0,len(split_node)):
+                if i%2 != 0:
+                    new_nodes.append(TextNode(split_node[i],text_type))
+                elif len(split_node[i])>0:
+                    new_nodes.append(TextNode(split_node[i],TextType.NORMAL_TEXT))
+    return new_nodes
