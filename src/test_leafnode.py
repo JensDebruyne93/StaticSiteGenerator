@@ -28,3 +28,6 @@ class TestLeafNode(unittest.TestCase):
     def test_leaf_multiple_props(self):
         node = LeafNode("img", "Image description", {"src": "image.jpg", "alt": "An image"})
         self.assertEqual(node.to_html(), '<img src="image.jpg" alt="An image">Image description</img>')
+
+if __name__ == "__main__":
+    unittest.main()
