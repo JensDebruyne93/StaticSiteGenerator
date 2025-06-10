@@ -1,7 +1,7 @@
 import unittest
 
 from textnode import TextNode, TextType, text_node_to_html_node
-from Inline_markdown import split_nodes_delimiter, extract_markdown_images, extract_markdown_links, split_nodes_image,split_nodes_link
+from Inline_markdown import split_nodes_delimiter, extract_markdown_images, extract_markdown_links,text_to_textnodes, split_nodes_image,split_nodes_link
 
 class TestSplitNode(unittest.TestCase):
     def test_codesplit(self):
@@ -152,6 +152,26 @@ class TestSplitNode(unittest.TestCase):
             ],
             new_nodes,
         )
+
+    def test_text_to_nodes(self):
+        text = "This is **text** with an _italic_ word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
+        nodes = text_to_textnodes(text)
+        self.assertListEqual(
+            [
+                TextNode("This is ", TextType.NORMAL_TEXT),
+                TextNode("text", TextType.BOLD_TEXT),
+                TextNode(" with an ", TextType.NORMAL_TEXT),
+                TextNode("italic", TextType.ITALIC_TEXT),
+                TextNode(" word and a ", TextType.NORMAL_TEXT),
+                TextNode("code block", TextType.CODE_TEXT),
+                TextNode(" and an ", TextType.NORMAL_TEXT),
+                TextNode("obi wan image", TextType.IMAGE, "https://i.imgur.com/fJRm4Vk.jpeg"),
+                TextNode(" and a ", TextType.NORMAL_TEXT),
+                TextNode("link", TextType.LINK, "https://boot.dev"),
+            ],
+            nodes
+        )
+    
 
 if __name__ == "__main__":
     unittest.main()
