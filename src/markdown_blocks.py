@@ -59,11 +59,10 @@ def markdown_to_html_node(markdown):
     return ParentNode("div", HTMLnodes)
         
 def block_to_html(block_type, text):
-    blocknode
     childrenNodes = []
     if block_type == BlockType.HEADING:
         number = get_number_of_hashes(text)
-    text = clean_text(block_type,text)
+    text = clean_text(text, block_type)
     match block_type:
         case BlockType.HEADING:
             childrenNodes = text_to_children(text)
