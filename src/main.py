@@ -9,7 +9,7 @@ def main():
       basepath = sys.argv[1]
    else:
       basepath = "/"
-   copy_to_dir("static","public")
+   copy_to_dir("static","docs")
    generate_pages_recursive("content", "template.html", "docs", basepath)
 
 def copy_to_dir(source, destination):
